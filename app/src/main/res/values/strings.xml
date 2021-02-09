@@ -4,4 +4,6 @@
     <string name="login_name">Username</string>
     <string name="login_button">Login</string>
     <string name="login_pass">Password</string>
+    <string name="logout">LogOut</string>
+    <string name="profile">Profile</string>
 </resources>
