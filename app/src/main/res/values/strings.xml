@@ -6,4 +6,6 @@
     <string name="login_pass">Password</string>
     <string name="logout">LogOut</string>
     <string name="profile">Profile</string>
+    <string name="sharedPreferences" translatable="false">com.example.project</string>
+    <string name="dbFilename" translatable="false">com.example.project</string>
 </resources>
