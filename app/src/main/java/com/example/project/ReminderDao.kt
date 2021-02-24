@@ -18,5 +18,6 @@ interface ReminderDao {
 
     @Query("SELECT * FROM reminderInfo")
     fun getReminderInfos(): List<ReminderInfo>
+
 }
 

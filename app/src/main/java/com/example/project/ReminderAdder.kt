@@ -19,7 +19,20 @@ class ReminderAdder : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // listener for datepicker
+        // find if there is a uid passed (editing)
+        // use intents getintextra methods
+        var intent = getIntent()
+        val uid = intent.getIntExtra("uid", 0)
+
+        // use uid to be seen in the edit window first
+        val uidText = uid.toString()
+        if (uidText != "0")  {
+            binding.idDisplayer.text = uidText
+        }
+        else binding.idDisplayer.text = "New"
+
+
+        // if we are editing, load the values from database with the uid
 
 
 

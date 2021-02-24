@@ -92,11 +92,24 @@ class MenuActivity : AppCompatActivity() {
                     //refresh payments list
                     refreshListView()
                 }
+
+                .setNeutralButton("Edit") { _, _ ->
+                    // Go to same menu where adding is done, but preload values?
+                    val editReminder = Intent(applicationContext, ReminderAdder::class.java)
+                    editReminder.putExtra("uid", selectedReminder.uid)
+                    startActivity(editReminder)
+                    finish()
+                }
+
+
+
                 .setNegativeButton("Cancel") { dialog, _ ->
                     // Do nothing
                     dialog.dismiss()
                 }
                 .show()
+
+
 
         }
     }
