@@ -55,7 +55,7 @@ class MenuActivity : AppCompatActivity() {
         //findViewById<FloatingActionButton>(R.id.btnAdd).setOnClickListener {
         view.btnAdd.setOnClickListener {
             startActivity(
-                Intent(applicationContext, ProfileActivity::class.java)
+                Intent(applicationContext, ReminderAdder::class.java)
             )
         }
 
