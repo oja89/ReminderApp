@@ -6,63 +6,87 @@
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/infoMsgHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Recipient"
+        android:text="@string/message"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txtAccountName"
+        android:id="@+id/infoMsgText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="18sp"
-        android:text="Firstname Lastname" />
+        android:text="@string/short_message" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/infoCreatorHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Account"
+        android:text="@string/creator"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txtAccountNumber"
+        android:id="@+id/infoCreatorId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="18sp"
-        android:text="IBAN Number" />
+        android:text="@string/creators_id" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Date"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtPaymentDate"
+        android:id="@+id/infoCreateTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="18sp"
-        android:text="dd.mm.yyyy" />
+        android:text="Created dd.mm.yyyy" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/infoTimeHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Amount"
+        android:text="@string/reminder_time"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txtPaymentAmount"
+        android:id="@+id/infoTimeStr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:text="@string/dd_mm_yyyy" />
+
+    <TextView
+        android:id="@+id/infoReminderSeen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:text="@string/seen_not_seen" />
+
+    <TextView
+        android:id="@+id/infoLocationHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/location"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/infoLocationX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:text="0.000" />
+
+    <TextView
+        android:id="@+id/infoLocationY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"

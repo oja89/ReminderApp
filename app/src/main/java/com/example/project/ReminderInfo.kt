@@ -15,7 +15,7 @@ data class ReminderInfo(
     @ColumnInfo(name = "reminder_time") var reminder_time: String,
     @ColumnInfo(name = "creation_time") var creation_time: String,
     @ColumnInfo(name = "creator_id") var creator_id: String,
-    @ColumnInfo(name = "reminder_seen") var reminder_seen: Int
+    @ColumnInfo(name = "reminder_seen") var reminder_seen: String
 )
 
 

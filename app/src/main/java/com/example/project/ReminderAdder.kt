@@ -19,6 +19,11 @@ class ReminderAdder : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        // listener for datepicker
+
+
+
+
         // listener for add new button
         binding.btnNewReminder.setOnClickListener {
             // validate values
@@ -37,13 +42,12 @@ class ReminderAdder : AppCompatActivity() {
             //message, location_x, location_y, reminder_time, creation_time, creator_id, reminder_seen
                 null,
                 message = binding.txtName.text.toString(),
-                location_x = '1'.toString(),
-                location_y = '1'.toString(),
+                location_x = "asdf".toString(),
+                location_y = "dfwefe".toString(),
                 reminder_time = binding.txtDate.text.toString(),
-                creation_time = '1'.toString(),
-                creator_id = '1'.toString(),
-                reminder_seen = 1
-
+                creation_time = "gaga".toString(),
+                creator_id = "afdf".toString(),
+                reminder_seen = "afaf".toString()
             )
 
             // convert date to dd.mm.yyyy
@@ -51,18 +55,17 @@ class ReminderAdder : AppCompatActivity() {
 
             // save to database
             AsyncTask.execute{
-            val db = Room.databaseBuilder(
+                val db = Room.databaseBuilder(
                     applicationContext,
                     AppDatabase::class.java,
                 getString(R.string.dbFilename)
-            ).build()
+                ).build()
 
-            val uuid = db.reminderDao().insert(reminderInfo).toInt()
-            db.close()
-
+                val uuid = db.reminderDao().insert(reminderInfo).toInt()
+                db.close()
             }
-            finish()
-        }
 
+        finish()
+        }
     }
 }

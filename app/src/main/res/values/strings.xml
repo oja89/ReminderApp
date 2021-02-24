@@ -8,4 +8,12 @@
     <string name="profile">Profile</string>
     <string name="sharedPreferences" translatable="false">com.example.project</string>
     <string name="dbFilename" translatable="false">com.example.project</string>
+    <string name="message">Message</string>
+    <string name="short_message">Short message</string>
+    <string name="creator">Creator</string>
+    <string name="creators_id">Creators Id</string>
+    <string name="reminder_time">Reminder date</string>
+    <string name="dd_mm_yyyy">dd.mm.yyyy</string>
+    <string name="location">Location</string>
+    <string name="seen_not_seen">Seen, Not seen</string>
 </resources>

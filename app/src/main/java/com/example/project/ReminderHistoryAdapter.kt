@@ -15,9 +15,13 @@ class ReminderHistoryAdapter(context: Context, private val list: List<ReminderIn
     override fun getView(position: Int, convertView: View?, container: ViewGroup?): View? {
         var rowBinding = ReminderHistoryItemBinding.inflate(inflater, container, false)
         //set payment info values to the list item
-        rowBinding.txtAccountName.text = list[position].message
-        rowBinding.txtPaymentAmount.text = list[position].creation_time
-        rowBinding.txtPaymentDate.text = list[position].reminder_time
+        rowBinding.infoMsgText.text = list[position].message
+        rowBinding.infoCreateTime.text = list[position].creation_time
+        rowBinding.infoCreatorId.text = list[position].creator_id
+        rowBinding.infoTimeStr.text = list[position].reminder_time
+        rowBinding.infoReminderSeen.text = list[position].reminder_seen
+        rowBinding.infoLocationX.text = list[position].location_x
+        rowBinding.infoLocationY.text = list[position].location_y
 
         return rowBinding.root
     }
