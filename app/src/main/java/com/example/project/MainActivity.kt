@@ -1,5 +1,6 @@
 package com.example.project
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -25,16 +26,32 @@ class MainActivity : AppCompatActivity() {
             var pass = R.id.txtPassword
 
             /// could not make this into HW1 deadline
-            //applicationContext.getSharedPreferences(
-            //        getString(R.string.sharedPreference),
-             //       Context.MODE_PRIVATE
-            //).edit().putInt("LoginStatus", 1).apply()
+            applicationContext.getSharedPreferences(
+                getString(R.string.sharedPreferences),
+                Context.MODE_PRIVATE
+            ).edit().putInt("LoginStatus", 1).apply()
 
 
             // finally start menu activity
             startActivity(
-                    Intent(applicationContext, MenuActivity::class.java)
+                Intent(applicationContext, MenuActivity::class.java)
             )
+        }
+        checkLoginStatus()
+    }
+    override fun onResume() {
+        super.onResume()
+        checkLoginStatus()
+    }
+
+
+    private fun checkLoginStatus() {
+        val loginStatus = applicationContext.getSharedPreferences(
+            getString(R.string.sharedPreferences),
+            Context.MODE_PRIVATE
+        ).getInt("LoginStatus", 0)
+        if (loginStatus == 1) {
+            startActivity(Intent(applicationContext, MenuActivity::class.java))
         }
     }
 }

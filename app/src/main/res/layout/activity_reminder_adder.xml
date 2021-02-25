@@ -7,48 +7,122 @@
     tools:context=".ReminderAdder">
 
     <EditText
-        android:id="@+id/txtName"
+        android:id="@+id/txtCreated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="CreatedDate"
+        android:inputType="date"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintStart_toEndOf="@+id/txtCreatorId"
+        app:layout_constraintTop_toBottomOf="@+id/txtLocationY" />
+
+    <EditText
+        android:id="@+id/txtCreatorId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="CreatorId"
+        android:inputType="date"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLocationX" />
+
+    <EditText
+        android:id="@+id/txtLocationY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:hint="LocationY"
+        android:inputType="date"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtLocationX"
+        app:layout_constraintTop_toBottomOf="@+id/txtReminderSeen" />
+
+    <EditText
+        android:id="@+id/txtLocationX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="LocationX"
+        android:inputType="date"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDate" />
+
+    <EditText
+        android:id="@+id/txtMessage"
+        android:layout_width="300dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Message"
         android:inputType="textShortMessage"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUid" />
 
     <EditText
         android:id="@+id/txtDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Date"
         android:inputType="date"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.172"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMessage" />
+
+    <EditText
+        android:id="@+id/txtReminderSeen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="ReminderSeen"
+        android:inputType="date"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/txtDate"
+        app:layout_constraintTop_toBottomOf="@+id/txtMessage" />
 
     <Button
         android:id="@+id/btnNewReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="New Reminder"
+        android:layout_marginTop="232dp"
+        android:text="Save Reminder"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDate" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMessage" />
 
     <TextView
-        android:id="@+id/idDisplayer"
+        android:id="@+id/txtUid"
         android:layout_width="54dp"
         android:layout_height="17dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
+        android:text="UID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNewReminder" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

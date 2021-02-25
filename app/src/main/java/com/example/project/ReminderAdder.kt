@@ -28,8 +28,7 @@ class ReminderAdder : AppCompatActivity() {
         // use uid to be seen in the edit window first
         val uidText = uid.toString()
         if (uidText != "0")  {
-            binding.idDisplayer.text = uidText
-
+            binding.txtUid.text = uidText
 
         // if we are editing, load the values from database with the uid
 
@@ -43,7 +42,17 @@ class ReminderAdder : AppCompatActivity() {
                     )
                     .build()
                 val dbData = db.reminderDao().getWithUid(uid)
+                binding.txtMessage.setText(dbData.message)
                 binding.txtDate.setText(dbData.reminder_time)
+                binding.txtReminderSeen.setText(dbData.reminder_seen)
+                binding.txtCreatorId.setText(dbData.creator_id)
+                binding.txtCreated.setText(dbData.creation_time)
+                binding.txtLocationX.setText(dbData.location_x)
+                binding.txtLocationY.setText(dbData.location_y)
+
+
+
+
                 db.close()
             }
 
@@ -53,7 +62,7 @@ class ReminderAdder : AppCompatActivity() {
 
         }
         // else no preloading, show uid as "new
-        else binding.idDisplayer.text = "New"
+        else binding.txtUid.text = "New"
 
 
 
@@ -64,7 +73,7 @@ class ReminderAdder : AppCompatActivity() {
         // listener for add new button
         binding.btnNewReminder.setOnClickListener {
             // validate values
-            if (binding.txtName.text.isEmpty()) {
+            if (binding.txtMessage.text.isEmpty()) {
                 Toast.makeText(
                         applicationContext,
                         "Name should not be empty",
@@ -74,19 +83,21 @@ class ReminderAdder : AppCompatActivity() {
             }
 
             // if validated, take the vals as reminderInfo
-
             val reminderInfo = ReminderInfo(
             //message, location_x, location_y, reminder_time, creation_time, creator_id, reminder_seen
                 // if uid is null, its a new one
                 // else should update the previous
-                uid = uid,
-                message = binding.txtName.text.toString(),
-                location_x = "asdf".toString(),
-                location_y = "dfwefe".toString(),
+                uid = if (uid == 0){
+                    null
+                    }
+                    else uid,
+                message = binding.txtMessage.text.toString(),
+                location_x = binding.txtLocationX.text.toString(),
+                location_y = binding.txtLocationY.text.toString(),
                 reminder_time = binding.txtDate.text.toString(),
-                creation_time = "gaga".toString(),
-                creator_id = "afdf".toString(),
-                reminder_seen = "afaf".toString()
+                creation_time = binding.txtCreated.text.toString(),
+                creator_id = binding.txtCreatorId.text.toString(),
+                reminder_seen = binding.txtReminderSeen.text.toString()
             )
 
             // convert date to dd.mm.yyyy

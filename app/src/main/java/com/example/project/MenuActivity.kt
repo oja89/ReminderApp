@@ -66,7 +66,7 @@ class MenuActivity : AppCompatActivity() {
 
             val selectedReminder = listView.adapter.getItem(position) as ReminderInfo
             val message =
-                "Do you want to delete ${selectedReminder.message} reminder, on ${selectedReminder.reminder_time}?"
+                "Do you want to delete or edit ${selectedReminder.message} reminder, on ${selectedReminder.reminder_time}?"
 
             // Show AlertDialog to delete the reminder
             val builder = AlertDialog.Builder(this@MenuActivity)
