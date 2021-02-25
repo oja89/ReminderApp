@@ -8,6 +8,7 @@ import androidx.room.Room
 import com.example.project.database.AppDatabase
 import com.example.project.databinding.ActivityReminderAdderBinding
 
+
 class ReminderAdder : AppCompatActivity() {
     private lateinit var binding: ActivityReminderAdderBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +29,34 @@ class ReminderAdder : AppCompatActivity() {
         val uidText = uid.toString()
         if (uidText != "0")  {
             binding.idDisplayer.text = uidText
-        }
-        else binding.idDisplayer.text = "New"
 
 
         // if we are editing, load the values from database with the uid
+
+            // this has errors and problems
+            AsyncTask.execute {
+                val db = Room
+                    .databaseBuilder(
+                        applicationContext,
+                        AppDatabase::class.java,
+                        getString(R.string.dbFilename)
+                    )
+                    .build()
+                //val dbData = db.reminderDao().getReminderInfos()
+                val dbData = db.reminderDao().getWithUid(uid)
+                binding.txtDate.setText(dbData.reminder_time)
+                db.close()
+            }
+
+
+            //binding.txtDate.setText()
+
+
+        }
+
+        else binding.idDisplayer.text = "New"
+
+
 
 
 
