@@ -1,9 +1,6 @@
 package com.example.project.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.example.project.ReminderInfo
 
 
@@ -22,5 +19,10 @@ interface ReminderDao {
     // try to get one UID
     @Query("SELECT * FROM reminderInfo WHERE uid = :id")
     fun getWithUid(id: Int): ReminderInfo
+
+    // trying to update
+    @Update
+    fun updateReminder(reminderInfo: ReminderInfo)
+
 }
 

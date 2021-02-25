@@ -42,7 +42,6 @@ class ReminderAdder : AppCompatActivity() {
                         getString(R.string.dbFilename)
                     )
                     .build()
-                //val dbData = db.reminderDao().getReminderInfos()
                 val dbData = db.reminderDao().getWithUid(uid)
                 binding.txtDate.setText(dbData.reminder_time)
                 db.close()
@@ -53,8 +52,9 @@ class ReminderAdder : AppCompatActivity() {
 
 
         }
-
+        // else no preloading, show uid as "new
         else binding.idDisplayer.text = "New"
+
 
 
 
@@ -77,7 +77,9 @@ class ReminderAdder : AppCompatActivity() {
 
             val reminderInfo = ReminderInfo(
             //message, location_x, location_y, reminder_time, creation_time, creator_id, reminder_seen
-                null,
+                // if uid is null, its a new one
+                // else should update the previous
+                uid = uid,
                 message = binding.txtName.text.toString(),
                 location_x = "asdf".toString(),
                 location_y = "dfwefe".toString(),
@@ -98,7 +100,15 @@ class ReminderAdder : AppCompatActivity() {
                 getString(R.string.dbFilename)
                 ).build()
 
-                val uuid = db.reminderDao().insert(reminderInfo).toInt()
+                // trying to make difference between modifying and adding
+                //val uuid = db.reminderDao().insert(reminderInfo).toInt()
+
+                if (uid != 0) {
+                    db.reminderDao().updateReminder(reminderInfo)
+                }
+                else {
+                    db.reminderDao().insert(reminderInfo).toInt()
+                }
                 db.close()
             }
 
