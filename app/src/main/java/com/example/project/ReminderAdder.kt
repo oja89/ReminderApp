@@ -111,13 +111,12 @@ class ReminderAdder : AppCompatActivity() {
                 getString(R.string.dbFilename)
                 ).build()
 
-                // trying to make difference between modifying and adding
-                //val uuid = db.reminderDao().insert(reminderInfo).toInt()
-
                 if (uid != 0) {
+                    // if the reminder is edited...
                     db.reminderDao().updateReminder(reminderInfo)
                 }
                 else {
+                    // if it is a new reminder
                     db.reminderDao().insert(reminderInfo).toInt()
                 }
                 db.close()

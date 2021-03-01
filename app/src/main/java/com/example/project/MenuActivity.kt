@@ -1,6 +1,7 @@
 package com.example.project
 
 import ReminderHistoryAdapter
+import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.room.Room
 import com.example.project.database.AppDatabase
 import com.example.project.databinding.ActivityMenuBinding
 import kotlinx.android.synthetic.main.activity_menu.view.*
+
 
 class MenuActivity : AppCompatActivity() {
     // binding
@@ -47,9 +49,15 @@ class MenuActivity : AppCompatActivity() {
         //findViewById<Button>(R.id.btnLogout).setOnClickListener {
         view.btnLogout.setOnClickListener{
             // set logged in -> false?
+            applicationContext.getSharedPreferences(
+                    getString(R.string.sharedPreferences),
+                    Context.MODE_PRIVATE
+            ).edit().putInt("LoginStatus", 0).apply()
+
             startActivity(
                     Intent(applicationContext, MainActivity::class.java)
             )
+
         }
 
         // button for adding new items to list
