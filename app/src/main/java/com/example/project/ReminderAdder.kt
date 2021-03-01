@@ -1,16 +1,28 @@
 package com.example.project
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.AsyncTask
 import android.os.Bundle
+import android.text.InputType
+import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.example.project.database.AppDatabase
 import com.example.project.databinding.ActivityReminderAdderBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class ReminderAdder : AppCompatActivity() {
+class ReminderAdder : AppCompatActivity(),
+    DatePickerDialog.OnDateSetListener,
+    TimePickerDialog.OnTimeSetListener
+    {
     private lateinit var binding: ActivityReminderAdderBinding
+    private lateinit var reminderCalendar: Calendar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -65,6 +77,19 @@ class ReminderAdder : AppCompatActivity() {
         else binding.txtUid.text = "New"
 
 
+        // date picker
+        binding.txtDate.inputType = InputType.TYPE_NULL
+        binding.txtDate.isClickable = true
+        binding.txtDate.setOnClickListener {
+            reminderCalendar = GregorianCalendar.getInstance()
+            DatePickerDialog(
+                this,
+                this,
+                reminderCalendar.get(Calendar.YEAR),
+                reminderCalendar.get(Calendar.MONTH),
+                reminderCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
 
 
 
@@ -125,4 +150,37 @@ class ReminderAdder : AppCompatActivity() {
         finish()
         }
     }
-}
+
+        override fun onDateSet(
+            dailogView: DatePicker?,
+            selectedYear: Int,
+            selectedMonth: Int,
+            selectedDayOfMonth: Int
+        ) {
+            reminderCalendar.set(Calendar.YEAR, selectedYear)
+            reminderCalendar.set(Calendar.MONTH, selectedMonth)
+            reminderCalendar.set(Calendar.DAY_OF_MONTH, selectedDayOfMonth)
+            val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy")
+            binding.txtDate.setText(simpleDateFormat.format(reminderCalendar.time))
+
+            // if you want to show time picker after the date
+            // you dont need this,change dateFormat value to dd.MM.yyyy
+            TimePickerDialog(
+                this,
+                this,
+                reminderCalendar.get(Calendar.HOUR_OF_DAY),
+                reminderCalendar.get(Calendar.MINUTE),
+                true
+            ).show()
+        }
+
+        override fun onTimeSet(view: TimePicker?, selectedhourOfDay: Int, selectedMinute: Int) {
+            reminderCalendar.set(Calendar.HOUR_OF_DAY, selectedhourOfDay)
+            reminderCalendar.set(Calendar.MINUTE, selectedMinute)
+            val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm")
+            binding.txtDate.setText(simpleDateFormat.format(reminderCalendar.time))
+        }
+    }
+
+
+
