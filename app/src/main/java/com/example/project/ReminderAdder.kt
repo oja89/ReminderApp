@@ -3,16 +3,20 @@ package com.example.project
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.example.project.database.AppDatabase
 import com.example.project.databinding.ActivityReminderAdderBinding
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -23,6 +27,7 @@ class ReminderAdder : AppCompatActivity(),
     private lateinit var binding: ActivityReminderAdderBinding
     private lateinit var reminderCalendar: Calendar
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -134,7 +139,16 @@ class ReminderAdder : AppCompatActivity(),
             )
 
             // convert date to dd.mm.yyyy
-                //do...
+            val popCalendar = GregorianCalendar.getInstance()
+            val dateFormat = "dd.MM.yyyy HH:mm"
+            // force to API version 26 (Build.VERSION_CODES.O)
+            val formatter = DateTimeFormatter.ofPattern(dateFormat)
+            val date = LocalDateTime.parse(reminderInfo.reminder_time, formatter)
+            popCalendar.set(Calendar.YEAR, date.year)
+            popCalendar.set(Calendar.MONTH, date.monthValue-1)
+            popCalendar.set(Calendar.DAY_OF_MONTH, date.dayOfMonth)
+            popCalendar.set(Calendar.HOUR_OF_DAY, date.hour)
+            popCalendar.set(Calendar.MINUTE, date.minute)
 
             // save to database
             AsyncTask.execute{
@@ -153,8 +167,23 @@ class ReminderAdder : AppCompatActivity(),
                     db.reminderDao().insert(reminderInfo).toInt()
                 }
                 db.close()
-            }
 
+                // to set a reminder...
+
+                // TODO double check this after...
+                if (popCalendar.timeInMillis > Calendar.getInstance().timeInMillis) {
+                    val showMessage =
+                        "Reminder: ${reminderInfo.message}"
+                    MenuActivity.setReminderWithWorkManager(
+                        applicationContext,
+                        uid,
+                        popCalendar.timeInMillis,
+                        showMessage
+                    )
+
+                }
+
+            }
         finish()
         }
     }
