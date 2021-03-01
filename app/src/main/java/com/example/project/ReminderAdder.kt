@@ -100,9 +100,17 @@ class ReminderAdder : AppCompatActivity(),
             // validate values
             if (binding.txtMessage.text.isEmpty()) {
                 Toast.makeText(
-                        applicationContext,
-                        "Name should not be empty",
-                        Toast.LENGTH_SHORT
+                    applicationContext,
+                    "Name should not be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+            if (binding.txtDate.text.isEmpty()) {
+                Toast.makeText(
+                    applicationContext,
+                    "Date should not be empty",
+                    Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
             }
