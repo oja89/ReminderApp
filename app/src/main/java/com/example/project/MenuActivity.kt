@@ -19,6 +19,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.project.database.AppDatabase
 import com.example.project.databinding.ActivityMenuBinding
+import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.activity_menu.view.*
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
@@ -43,15 +44,27 @@ class MenuActivity : AppCompatActivity() {
 
 
         // button for profile
-        //findViewById<Button>(R.id.btnProfile).setOnClickListener {
         view.btnProfile.setOnClickListener{
             startActivity(
                     Intent(applicationContext, ProfileActivity::class.java)
             )
         }
 
+        // button for viewall
+        view.btnViewToggle.setOnClickListener{
+            // change the view
+            if (btnViewToggle.text == "Due") {
+            btnViewToggle.text = ("All")
+            }
+            else {
+                btnViewToggle.text = ("Due")
+            }
+            // then refresh
+            refreshListView()
+        }
+
+
         // button for logout
-        //findViewById<Button>(R.id.btnLogout).setOnClickListener {
         view.btnLogout.setOnClickListener{
             // set logged in -> false?
             applicationContext.getSharedPreferences(
@@ -133,9 +146,9 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun refreshListView() {
+        // refresh the view
         var refreshTask = LoadReminderInfoEntries()
         refreshTask.execute()
-
     }
 
     inner class LoadReminderInfoEntries : AsyncTask<String?, String?, List<ReminderInfo>>() {
@@ -147,9 +160,20 @@ class MenuActivity : AppCompatActivity() {
                     getString(R.string.dbFilename)
                 )
                 .build()
-            val reminderInfos = db.reminderDao().getReminderInfos()
-            db.close()
-            return reminderInfos
+
+            // apply value from toggle button
+            if (btnViewToggle.text == "All") {
+                val reminderInfos = db.reminderDao().getReminderInfos()
+                db.close()
+                return reminderInfos
+            }
+            else {
+                // take only reminders that have not yet been seen (and have no location)
+                val dueReminders = db.reminderDao().getDueReminders(1)
+                //val dueReminders = db.reminderDao().getDueReminders()
+                db.close()
+                return dueReminders
+            }
         }
 
         override fun onPostExecute(reminderInfos: List<ReminderInfo>?) {

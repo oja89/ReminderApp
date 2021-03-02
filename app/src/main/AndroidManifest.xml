@@ -9,21 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project">
+
         <activity
             android:name=".MainActivity"
             android:label="Login Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MenuActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".ReminderAdder"
-            android:parentActivityName=".MenuActivity"/>
-        <activity android:name=".ProfileActivity"
-            android:parentActivityName=".MenuActivity"/>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AllReminders"
+            android:parentActivityName=".MenuActivity" />
+        <activity
+            android:name=".ReminderAdder"
+            android:parentActivityName=".MenuActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MenuActivity" />
     </application>
 
 </manifest>

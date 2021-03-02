@@ -24,8 +24,9 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             var user = R.id.txtUsername
             var pass = R.id.txtPassword
+            // these should be compared, not included...
 
-            /// could not make this into HW1 deadline
+            // change the state of loginstatus
             applicationContext.getSharedPreferences(
                 getString(R.string.sharedPreferences),
                 Context.MODE_PRIVATE
@@ -46,11 +47,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun checkLoginStatus() {
+        // check if logged in
         val loginStatus = applicationContext.getSharedPreferences(
             getString(R.string.sharedPreferences),
             Context.MODE_PRIVATE
         ).getInt("LoginStatus", 0)
         if (loginStatus == 1) {
+            // if logged in, open menuactivity instead
             startActivity(Intent(applicationContext, MenuActivity::class.java))
         }
     }

@@ -16,6 +16,14 @@ interface ReminderDao {
     @Query("SELECT * FROM reminderInfo")
     fun getReminderInfos(): List<ReminderInfo>
 
+    @Query("SELECT * FROM reminderInfo WHERE reminder_seen = :seen AND location_x == '' AND location_y == ''")
+    //@Query("SELECT * FROM reminderInfo WHERE reminder_seen = :seen")
+    //@Query("SELECT * FROM reminderInfo WHERE location_x == '' OR location_x IS NULL")
+    //fun getDueReminders(): List<ReminderInfo>
+    fun getDueReminders(seen: Int): List<ReminderInfo>
+
+
+
     // try to get one UID
     @Query("SELECT * FROM reminderInfo WHERE uid = :id")
     fun getWithUid(id: Int): ReminderInfo

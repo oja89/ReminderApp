@@ -72,13 +72,9 @@ class ReminderAdder : AppCompatActivity(),
 
                 db.close()
             }
-
-
-            //binding.txtDate.setText()
-
-
         }
-        // else no preloading, show uid as "new
+
+        // else no preloading, show uid as "new"
         else binding.txtUid.text = "New"
 
 
@@ -95,9 +91,6 @@ class ReminderAdder : AppCompatActivity(),
                 reminderCalendar.get(Calendar.DAY_OF_MONTH)
             ).show()
         }
-
-
-
 
 
         // listener for add new button
@@ -169,8 +162,6 @@ class ReminderAdder : AppCompatActivity(),
                 db.close()
 
                 // to set a reminder...
-
-                // TODO double check this after...
                 if (popCalendar.timeInMillis > Calendar.getInstance().timeInMillis) {
                     val showMessage =
                         "Reminder: ${reminderInfo.message}"
@@ -189,7 +180,7 @@ class ReminderAdder : AppCompatActivity(),
     }
 
         override fun onDateSet(
-            dailogView: DatePicker?,
+            dialogView: DatePicker?,
             selectedYear: Int,
             selectedMonth: Int,
             selectedDayOfMonth: Int
