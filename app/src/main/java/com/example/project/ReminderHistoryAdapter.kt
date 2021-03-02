@@ -19,7 +19,7 @@ class ReminderHistoryAdapter(context: Context, private val list: List<ReminderIn
         rowBinding.infoCreateTime.text = list[position].creation_time
         rowBinding.infoCreatorId.text = list[position].creator_id
         rowBinding.infoTimeStr.text = list[position].reminder_time
-        rowBinding.infoReminderSeen.text = list[position].reminder_seen
+        rowBinding.infoReminderSeen.text = list[position].reminder_seen.toString()
         rowBinding.infoLocationX.text = list[position].location_x
         rowBinding.infoLocationY.text = list[position].location_y
 

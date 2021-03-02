@@ -60,7 +60,7 @@ class ReminderAdder : AppCompatActivity(),
                 val dbData = db.reminderDao().getWithUid(uid)
                 binding.txtMessage.setText(dbData.message)
                 binding.txtDate.setText(dbData.reminder_time) // picker
-                binding.txtReminderSeen.setText(dbData.reminder_seen) // non editable
+                binding.txtReminderSeen.setText(dbData.reminder_seen.toString()) // non editable
                 binding.txtCreatorId.setText(dbData.creator_id) // non editable
                 binding.txtCreated.setText(dbData.creation_time) // non editable
                 binding.txtLocationX.setText(dbData.location_x)
@@ -138,7 +138,7 @@ class ReminderAdder : AppCompatActivity(),
                 reminder_time = binding.txtDate.text.toString(),
                 creation_time = binding.txtCreated.text.toString(),
                 creator_id = binding.txtCreatorId.text.toString(),
-                reminder_seen = binding.txtReminderSeen.text.toString()
+                reminder_seen = Integer.parseInt(binding.txtReminderSeen.text.toString())
             )
 
             // convert date to dd.mm.yyyy
@@ -184,8 +184,7 @@ class ReminderAdder : AppCompatActivity(),
                     val showMessage =
                         "Reminder: ${reminderInfo.message}"
                     var showUid: Int = 0
-                    // we dont know the uid before saving?
-                    // and we cant find the reminder after saving..
+
                     // check if there is a row id (aka new row)
                     if (rowId == -1) {
                         showUid = reminderInfo.uid?.toInt() ?:0
