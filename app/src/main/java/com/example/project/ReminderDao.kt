@@ -8,7 +8,7 @@ import com.example.project.ReminderInfo
 interface ReminderDao {
     @Transaction
     @Insert
-    fun insert(reminderInfo: ReminderInfo): Long
+    fun insert(reminderInfo: ReminderInfo): Long //this <- should give id?
 
     @Query("DELETE FROM reminderInfo WHERE uid = :id")
     fun delete(id: Int)
@@ -19,15 +19,12 @@ interface ReminderDao {
     @Query("SELECT * FROM reminderInfo WHERE reminder_seen = :seen AND location_x == '' AND location_y == ''")
     fun getDueReminders(seen: Int): List<ReminderInfo>
 
-
-
-    // try to get one UID
     @Query("SELECT * FROM reminderInfo WHERE uid = :id")
     fun getWithUid(id: Int): ReminderInfo
 
-    // trying to update
     @Update
     fun updateReminder(reminderInfo: ReminderInfo)
+
 
 }
 

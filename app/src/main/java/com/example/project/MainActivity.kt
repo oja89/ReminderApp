@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
             val pass = binding.txtPassword
             // these should be compared, not included (yet)
 
+
+
             //just save the username for creatorId purposes
             applicationContext.getSharedPreferences(
                 getString(R.string.sharedPreferences),

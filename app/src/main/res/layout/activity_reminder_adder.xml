@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
+        android:enabled="false"
         android:hint="CreatorId"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,8 +92,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="12dp"
+        android:editable="false"
         android:ems="10"
         android:hint="ReminderSeen"
+        android:text="0"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/txtDate"
         app:layout_constraintTop_toBottomOf="@+id/txtMessage" />

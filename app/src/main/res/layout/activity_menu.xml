@@ -12,7 +12,7 @@
         android:id="@+id/btnViewToggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="toggle"
+        android:text="Due"
         app:layout_constraintBottom_toTopOf="@+id/mainList"
         app:layout_constraintEnd_toStartOf="@+id/btnLogout"
         app:layout_constraintStart_toEndOf="@+id/btnProfile"

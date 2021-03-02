@@ -49,8 +49,6 @@ class ReminderAdder : AppCompatActivity(),
             binding.txtUid.text = uidText
 
         // if we are editing, load the values from database with the uid
-
-            // this has errors and problems
             AsyncTask.execute {
                 val db = Room
                     .databaseBuilder(
@@ -61,10 +59,10 @@ class ReminderAdder : AppCompatActivity(),
                     .build()
                 val dbData = db.reminderDao().getWithUid(uid)
                 binding.txtMessage.setText(dbData.message)
-                binding.txtDate.setText(dbData.reminder_time)
-                binding.txtReminderSeen.setText(dbData.reminder_seen)
-                binding.txtCreatorId.setText(dbData.creator_id)
-                binding.txtCreated.setText(dbData.creation_time)
+                binding.txtDate.setText(dbData.reminder_time) // picker
+                binding.txtReminderSeen.setText(dbData.reminder_seen) // non editable
+                binding.txtCreatorId.setText(dbData.creator_id) // non editable
+                binding.txtCreated.setText(dbData.creation_time) // non editable
                 binding.txtLocationX.setText(dbData.location_x)
                 binding.txtLocationY.setText(dbData.location_y)
 
@@ -78,14 +76,14 @@ class ReminderAdder : AppCompatActivity(),
         // else no preloading, show uid as "new"
         else {
             binding.txtUid.text = "New"
-
-            // get creator id to show up
+            // also when saving, there is a creation date saving part
+            // and creator id is saved too
             var creator: String? = applicationContext.getSharedPreferences(
                 getString(R.string.sharedPreferences),
                 Context.MODE_PRIVATE
                 ).getString("Username", "Missing")
             binding.txtCreatorId.setText(creator)
-            // also when saving, there is a creation date saving part
+
         }
 
 
@@ -157,6 +155,9 @@ class ReminderAdder : AppCompatActivity(),
 
             // save to database
             AsyncTask.execute{
+                // id of the NEW row
+                var rowId: Int = -1
+
                 val db = Room.databaseBuilder(
                     applicationContext,
                     AppDatabase::class.java,
@@ -173,7 +174,8 @@ class ReminderAdder : AppCompatActivity(),
                     val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm")
                     reminderInfo.creation_time = simpleDateFormat.format(popCalendar.time)
 
-                    db.reminderDao().insert(reminderInfo).toInt()
+                    // is there a id?
+                    rowId = db.reminderDao().insert(reminderInfo).toInt()
                 }
                 db.close()
 
@@ -181,9 +183,18 @@ class ReminderAdder : AppCompatActivity(),
                 if (popCalendar.timeInMillis > Calendar.getInstance().timeInMillis) {
                     val showMessage =
                         "Reminder: ${reminderInfo.message}"
+                    var showUid: Int = 0
+                    // we dont know the uid before saving?
+                    // and we cant find the reminder after saving..
+                    // check if there is a row id (aka new row)
+                    if (rowId == -1) {
+                        showUid = reminderInfo.uid?.toInt() ?:0
+                    }
+                    else showUid = rowId
+
                     MenuActivity.setReminderWithWorkManager(
                         applicationContext,
-                        uid,
+                        showUid,
                         popCalendar.timeInMillis,
                         showMessage
                     )

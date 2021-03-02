@@ -194,14 +194,20 @@ class MenuActivity : AppCompatActivity() {
 
 
         @RequiresApi(Build.VERSION_CODES.O)
-        fun showNofitication(context: Context, message: String) {
+        fun showNofitication(context: Context, message: String, uid: Int) {
 
             // get intent to open with press of notification
-            val resultIntent = Intent(context, MenuActivity::class.java)
+            //val resultIntent = Intent(context, MenuActivity::class.java)
+
+            // try to add uid in the intent
+            val resultIntent = Intent(context, PopReminder::class.java)
+            resultIntent.putExtra("uid", uid)
+
             val resultPendingIntent: PendingIntent= TaskStackBuilder.create(context).run {
                 addNextIntentWithParentStack(resultIntent)
                 getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
             }
+
 
             val CHANNEL_ID = "REMINDER_APP_NOTIFICATION_CHANNEL"
 

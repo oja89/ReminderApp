@@ -12,7 +12,8 @@ class ReminderWorker(appContext: Context, workerParameters: WorkerParameters) :
     @RequiresApi(Build.VERSION_CODES.O)
     override fun doWork(): Result {
         val text = inputData.getString("message") // this comes from the reminder parameters
-        MenuActivity.showNofitication(applicationContext,text!!)
+        val uid = inputData.getInt("uid", 0)
+        MenuActivity.showNofitication(applicationContext,text!!,uid)
         return   Result.success()
     }
 }
