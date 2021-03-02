@@ -7,14 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.example.project.database.AppDatabase
 import com.example.project.databinding.ActivityPopReminderBinding
-import com.example.project.ReminderInfo as ReminderInfo1
 
 class PopReminder : AppCompatActivity() {
     private lateinit var binding: ActivityPopReminderBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pop_reminder)
 
         // bindings
         binding = ActivityPopReminderBinding.inflate(layoutInflater)
