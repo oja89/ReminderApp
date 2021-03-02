@@ -1,9 +1,7 @@
 package com.example.project
 
 import ReminderHistoryAdapter
-import android.app.AlertDialog
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
@@ -33,18 +31,15 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         //binding
         // create binding
         binding = ActivityMenuBinding.inflate(layoutInflater)
         val view = binding.root
 
+        // set listView
         setContentView(view)
-
         listView = binding.mainList
-
         refreshListView()
-
 
 
         // button for profile
@@ -78,7 +73,7 @@ class MenuActivity : AppCompatActivity() {
             )
         }
 
-
+        // clicking item on list...
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, id ->
             //retrieve selected Item
 
@@ -173,11 +168,21 @@ class MenuActivity : AppCompatActivity() {
     companion object {
         // reminder manager'
 
+
         @RequiresApi(Build.VERSION_CODES.O)
         fun showNofitication(context: Context, message: String) {
 
+            // get intent to open with press of notification
+            val resultIntent = Intent(context, MenuActivity::class.java)
+            val resultPendingIntent: PendingIntent= TaskStackBuilder.create(context).run {
+                addNextIntentWithParentStack(resultIntent)
+                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            }
+
             val CHANNEL_ID = "REMINDER_APP_NOTIFICATION_CHANNEL"
+
             // why is there a randomizer?
+            // guess that the id needs to be different?
             var notificationId = Random.nextInt(10, 1000) + 5
 
             var notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
@@ -187,6 +192,10 @@ class MenuActivity : AppCompatActivity() {
                 .setStyle(NotificationCompat.BigTextStyle().bigText(message))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setGroup(CHANNEL_ID)
+                // open intent with click of notification
+                .setContentIntent(resultPendingIntent)
+                // remove the notification with click
+                .setAutoCancel(true)
 
             val notificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -201,7 +210,7 @@ class MenuActivity : AppCompatActivity() {
             }
             notificationManager.createNotificationChannel(channel)
 
-
+            // show the notification
             notificationManager.notify(notificationId, notificationBuilder.build())
 
         }
@@ -232,5 +241,4 @@ class MenuActivity : AppCompatActivity() {
             WorkManager.getInstance(context).enqueue(reminderRequest)
         }
     }
-
 }
