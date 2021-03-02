@@ -2,6 +2,7 @@ package com.example.project
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
@@ -75,7 +76,18 @@ class ReminderAdder : AppCompatActivity(),
         }
 
         // else no preloading, show uid as "new"
-        else binding.txtUid.text = "New"
+        else {
+            binding.txtUid.text = "New"
+
+            // get creator id to show up
+            var creator: String? = applicationContext.getSharedPreferences(
+                getString(R.string.sharedPreferences),
+                Context.MODE_PRIVATE
+                ).getString("Username", "Missing")
+            binding.txtCreatorId.setText(creator)
+            // also when saving, there is a creation date saving part
+        }
+
 
 
         // date picker
@@ -156,7 +168,11 @@ class ReminderAdder : AppCompatActivity(),
                     db.reminderDao().updateReminder(reminderInfo)
                 }
                 else {
-                    // if it is a new reminder
+                    // if it is a new
+                    // get the datetime when saving
+                    val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm")
+                    reminderInfo.creation_time = simpleDateFormat.format(popCalendar.time)
+
                     db.reminderDao().insert(reminderInfo).toInt()
                 }
                 db.close()

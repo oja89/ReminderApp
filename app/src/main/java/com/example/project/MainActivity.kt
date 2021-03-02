@@ -3,6 +3,7 @@ package com.example.project
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.project.databinding.ActivityMainBinding
 
@@ -22,9 +23,16 @@ class MainActivity : AppCompatActivity() {
         // login button functions
         //findViewById<Button>(R.id.btnLogin).setOnClickListener {
         binding.btnLogin.setOnClickListener {
-            var user = R.id.txtUsername
-            var pass = R.id.txtPassword
-            // these should be compared, not included...
+            val user: String = binding.txtUsername.text.toString()
+            val pass = binding.txtPassword
+            // these should be compared, not included (yet)
+
+            //just save the username for creatorId purposes
+            applicationContext.getSharedPreferences(
+                getString(R.string.sharedPreferences),
+                Context.MODE_PRIVATE
+            ).edit().putString("Username", user).apply()
+
 
             // change the state of loginstatus
             applicationContext.getSharedPreferences(
@@ -32,6 +40,13 @@ class MainActivity : AppCompatActivity() {
                 Context.MODE_PRIVATE
             ).edit().putInt("LoginStatus", 1).apply()
 
+            // check what we saved
+            val userSaved = applicationContext.getSharedPreferences(
+                getString(R.string.sharedPreferences),
+                Context.MODE_PRIVATE
+            ).getString("Username", "empty")
+            // greet user
+            Toast.makeText(applicationContext, "Hello $userSaved !", Toast.LENGTH_SHORT).show()
 
             // finally start menu activity
             startActivity(
