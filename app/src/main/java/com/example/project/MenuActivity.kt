@@ -1,4 +1,4 @@
-package com.example.project
+ package com.example.project
 
 import ReminderHistoryAdapter
 import android.app.*
@@ -137,6 +137,9 @@ class MenuActivity : AppCompatActivity() {
 
 
 
+        }
+        view.btnTest.setOnClickListener {
+            startActivity(Intent(applicationContext, MapActivity::class.java))
         }
     }
 
