@@ -10,8 +10,8 @@ data class ReminderInfo(
     //message, location_x, location_y, reminder_time, creation_time, creator_id, reminder_seen
     @PrimaryKey(autoGenerate = true) var uid: Int?,
     @ColumnInfo(name = "message") var message: String,
-    @ColumnInfo(name = "location_x") var location_x: String,
-    @ColumnInfo(name = "location_y") var location_y: String,
+    @ColumnInfo(name = "location_x") var location_x: Double,
+    @ColumnInfo(name = "location_y") var location_y: Double,
     @ColumnInfo(name = "reminder_time") var reminder_time: String,
     @ColumnInfo(name = "creation_time") var creation_time: String,
     @ColumnInfo(name = "creator_id") var creator_id: String,

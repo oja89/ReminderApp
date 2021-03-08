@@ -17,4 +17,10 @@
         android:id="@+id/terrain_map"
         android:title="@string/terrain_map"
         app:showAsAction="never" />|
+    <item
+        android:id="@+id/mock_location"
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/mock_location"
+        app:showAsAction="never" />|
 </menu>

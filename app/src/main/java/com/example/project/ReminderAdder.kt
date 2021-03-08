@@ -63,8 +63,8 @@ class ReminderAdder : AppCompatActivity(),
                 binding.txtReminderSeen.setText(dbData.reminder_seen.toString()) // non editable
                 binding.txtCreatorId.setText(dbData.creator_id) // non editable
                 binding.txtCreated.setText(dbData.creation_time) // non editable
-                binding.txtLocationX.setText(dbData.location_x)
-                binding.txtLocationY.setText(dbData.location_y)
+                binding.txtLocationX.setText(dbData.location_x.toString())
+                binding.txtLocationY.setText(dbData.location_y.toString())
 
 
 
@@ -133,8 +133,8 @@ class ReminderAdder : AppCompatActivity(),
                     }
                     else uid,
                 message = binding.txtMessage.text.toString(),
-                location_x = binding.txtLocationX.text.toString(),
-                location_y = binding.txtLocationY.text.toString(),
+                location_x = (binding.txtLocationX.text.toString()).toDouble(),
+                location_y = (binding.txtLocationY.text.toString()).toDouble(),
                 reminder_time = binding.txtDate.text.toString(),
                 creation_time = binding.txtCreated.text.toString(),
                 creator_id = binding.txtCreatorId.text.toString(),
